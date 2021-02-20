@@ -8,6 +8,10 @@ const fragment = document.createDocumentFragment()
 document.addEventListener('DOMContentLoaded', () => {
   fetchData()
 })
+// el Div escucha cuando se esta tocando algun elemnto hijo y se lo pasa a la funcion addtoCart
+items.addEventListener('click', (e) => {
+  addToCart(e)
+})
 
 const fetchData = async () => {
   try {
@@ -20,6 +24,7 @@ const fetchData = async () => {
   }
 }
 
+//Funcion para extraer datos de bdd.json y pintarlos en el HTML
 const pintarCards = data => {
 //  console.log(data);
   data.forEach(item => {
@@ -32,4 +37,12 @@ const pintarCards = data => {
   });
 
   items.appendChild(fragment)
+}
+
+// Capturar cuando se clickea el boton con la clase btn-dark
+const addToCart = e => {
+  // console.log(e.target.classList.contains('btn-dark'))
+  if (e.target.classList.contains('btn-dark')) {
+    
+  }
 }
