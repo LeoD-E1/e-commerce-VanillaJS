@@ -1,0 +1,38 @@
+[
+  {
+    "precio": 500,
+    "id": 1,
+    "title": "Café",
+    "thumbnailUrl": "https://cdn.pixabay.com/photo/2017/05/12/08/29/coffee-2306471_960_720.jpg"
+  },
+  {
+    "precio": 300,
+    "id": 2,
+    "title": "Pizza",
+    "thumbnailUrl": "https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_960_720.jpg"
+  },
+  {
+    "precio": 100,
+    "id": 3,
+    "title": "Agua",
+    "thumbnailUrl": "https://cdn.pixabay.com/photo/2016/11/18/18/24/bottle-1836261_960_720.jpg"
+  },
+  {
+    "precio": 50,
+    "id": 4,
+    "title": "Sandía",
+    "thumbnailUrl": "https://cdn.pixabay.com/photo/2018/07/14/19/58/heart-3538291_960_720.jpg"
+  },
+  {
+    "precio": 10,
+    "id": 5,
+    "title": "Mango",
+    "thumbnailUrl": "https://cdn.pixabay.com/photo/2016/03/05/22/41/mango-1239347_960_720.jpg"
+  },
+  {
+    "precio": 150,
+    "id": 6,
+    "title": "Pollo Asado",
+    "thumbnailUrl": "https://cdn.pixabay.com/photo/2016/02/14/10/39/chicken-1199243_960_720.jpg"
+  }
+]
