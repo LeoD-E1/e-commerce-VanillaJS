@@ -1,15 +1,18 @@
 // Leer los datos desde el Json para poder pintarlos pero una vez que carga todo el HTML
-
 const items = document.getElementById('items')
-const template = document.getElementById('template-card').content
+const footer = document.getElementById('footer')
+const cards = document.getElementById('cards')
 const fragment = document.createDocumentFragment()
-
+const template = document.getElementById('template-card').content
+const templateFooter = document.getElementById('template-footer').content
+const templateCarrito = document.getElementById('template-carrito').content
+let carrito = {}
 
 document.addEventListener('DOMContentLoaded', () => {
   fetchData()
 })
 // el Div escucha cuando se esta tocando algun elemnto hijo y se lo pasa a la funcion addtoCart
-items.addEventListener('click', (e) => {
+cards.addEventListener('click', (e) => {
   addToCart(e)
 })
 
@@ -36,13 +39,52 @@ const pintarCards = data => {
     fragment.appendChild(clone)
   });
 
-  items.appendChild(fragment)
+  cards.appendChild(fragment)
 }
 
 // Capturar cuando se clickea el boton con la clase btn-dark
 const addToCart = e => {
   // console.log(e.target.classList.contains('btn-dark'))
   if (e.target.classList.contains('btn-dark')) {
-    
+    setCarrito(e.target.parentElement)
   }
+  e.stopPropagation()
+}
+
+
+const setCarrito = objeto => {
+  
+  const producto = {
+    id: objeto.querySelector('.btn-dark').dataset.id,
+    titulo: objeto.querySelector('h5').textContent,
+    precio: objeto.querySelector('p').textContent,
+    cantidad: 1
+  }
+  
+  if(carrito.hasOwnProperty(producto.id)){
+    producto.cantidad = carrito[producto.id].cantidad + 1
+  }
+  carrito[producto.id] = {...producto}
+  pintarCarrito()
+}
+
+const pintarCarrito = () => {
+  items.innerHTML = ''
+  // console.log(carrito)
+  Object.values(carrito).forEach(producto => {
+    templateCarrito.querySelector('th').textContent = producto.id
+    templateCarrito.querySelectorAll('td')[0].textContent = producto.title
+    templateCarrito.querySelectorAll('td')[1].textContent = producto.cantidad
+    templateCarrito.querySelectorAll('span').textContent = producto.precio * producto.cantidad
+    templateCarrito.querySelector('.font-weight-bold')
+
+    // Botones
+    templateCarrito.querySelector('.btn-info').dataset.id = producto.id
+    templateCarrito.querySelector('.btn-danger').dataset.id = producto.id
+
+
+    const clone = templateCarrito.cloneNode(true)
+    fragment.appendChild(clone)
+  })
+  items.appendChild(fragment)
 }
