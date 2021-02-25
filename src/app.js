@@ -10,11 +10,21 @@ let carrito = {}
 
 document.addEventListener('DOMContentLoaded', () => {
   fetchData()
+  // Si hay objetos en mi localStorage, transforma el texto plano en JSON y ejecuta pintarCarrito()
+  if(localStorage.getItem('carrito')){
+    carrito = JSON.parse(localStorage.getItem('carrito'))
+    pintarCarrito()
+  }
 })
 // el Div escucha cuando se esta tocando algun elemnto hijo y se lo pasa a la funcion addtoCart
 cards.addEventListener('click', (e) => {
   addToCart(e)
 })
+
+items.addEventListener('click', e => {
+  btnAccion(e)
+})
+
 
 const fetchData = async () => {
   try {
@@ -86,12 +96,9 @@ const pintarCarrito = () => {
   })
   items.appendChild(fragment)
   pintarFooter()
+  // Guardamos el item pintado en el localStorage para mantenerlo, se guarda como un texto plano, por eso pasamos como segundo parametro el JSON
+  localStorage.setItem('carrito', JSON.stringify(carrito))
 }
-
-//Funciones de los botones para aumentar la cantidad de productos
-const addButton = templateCarrito.querySelector('.btn-info').dataset.id
-addButton.Object.values(carrio).reduce(({cantidad}) => cantidad + 1 ,0)
-
 
 const pintarFooter = () => {
 
@@ -117,4 +124,25 @@ const pintarFooter = () => {
     carrito = {}
     pintarCarrito()
   })
+}
+
+const btnAccion = (e) => {
+
+  if (e.target.classList.contains('btn-danger')) {
+    const prod = carrito[e.target.dataset.id]
+    prod.cantidad --
+    if(prod.cantidad === 0) {
+      delete carrito[e.target.dataset.id]
+    }else{
+      carrito[e.target.dataset.id] = {...prod}
+    }
+  }
+
+  if (e.target.classList.contains('btn-info')) {
+    const prod = carrito[e.target.dataset.id]
+    prod.cantidad++
+    carrito[e.target.dataset.id] = {...prod}
+  }
+  pintarCarrito()
+  e.stopPropagation()
 }
