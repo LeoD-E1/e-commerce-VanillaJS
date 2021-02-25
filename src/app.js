@@ -87,8 +87,11 @@ const pintarCarrito = () => {
   items.appendChild(fragment)
   pintarFooter()
 }
-// Si tocaron footer les paso el evento para detectar que tocaron el boton
-footer.addEventListener('click', (e) => {vaciarCarrito(e)})
+
+//Funciones de los botones para aumentar la cantidad de productos
+const addButton = templateCarrito.querySelector('.btn-info').dataset.id
+addButton.Object.values(carrio).reduce(({cantidad}) => cantidad + 1 ,0)
+
 
 const pintarFooter = () => {
 
@@ -97,26 +100,21 @@ const pintarFooter = () => {
     footer.innerHTML =`
       <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>
     `
+    return
   }
 
-  else{
-    const nCantidad = Object.values(carrito).reduce((count, {cantidad}) => count + cantidad,0)
-    const nPrecio = Object.values(carrito).reduce((count, {precio, cantidad}) => count + precio * cantidad, 0)
-    
-    templateFooter.querySelectorAll('td')[0].textContent = nCantidad
-    templateFooter.querySelector('span').textContent = nPrecio
-    const clone = templateFooter.cloneNode(true)
-    fragment.appendChild(clone)
-    footer.appendChild(fragment)
-  }
-}
-
-//Funcion de borrar carrito si se detecta que el boton que contiene la class btn-danger fue clickeado
-
-const vaciarCarrito = e => {
-  if(e.target.classList.contains('btn-danger')){
-    items.innerHTML = '' 
-    Object.values(carrito) = {}
-  }
-  e.stopPropagation()
+  const nCantidad = Object.values(carrito).reduce((count, {cantidad}) => count + cantidad,0)
+  const nPrecio = Object.values(carrito).reduce((count, {precio, cantidad}) => count + precio * cantidad, 0)
+  
+  templateFooter.querySelectorAll('td')[0].textContent = nCantidad
+  templateFooter.querySelector('span').textContent = nPrecio
+  const clone = templateFooter.cloneNode(true)
+  fragment.appendChild(clone)
+  footer.appendChild(fragment)
+  // Boton para vaciar carrito y a la vez pintarlo
+  const vaciarCarrito = document.querySelector('#vaciar-carrito')
+  vaciarCarrito.addEventListener('click', () => {
+    carrito = {}
+    pintarCarrito()
+  })
 }
