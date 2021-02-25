@@ -75,16 +75,48 @@ const pintarCarrito = () => {
     templateCarrito.querySelector('th').textContent = producto.id
     templateCarrito.querySelectorAll('td')[0].textContent = producto.title
     templateCarrito.querySelectorAll('td')[1].textContent = producto.cantidad
-    templateCarrito.querySelectorAll('span').textContent = producto.precio * producto.cantidad
+    templateCarrito.querySelector('span').textContent = producto.precio * producto.cantidad
     templateCarrito.querySelector('.font-weight-bold')
-
     // Botones
     templateCarrito.querySelector('.btn-info').dataset.id = producto.id
     templateCarrito.querySelector('.btn-danger').dataset.id = producto.id
-
-
+    //Clone
     const clone = templateCarrito.cloneNode(true)
     fragment.appendChild(clone)
   })
   items.appendChild(fragment)
+  pintarFooter()
+}
+// Si tocaron footer les paso el evento para detectar que tocaron el boton
+footer.addEventListener('click', (e) => {vaciarCarrito(e)})
+
+const pintarFooter = () => {
+
+  footer.innerHTML = ''
+  if(Object.keys(carrito).length === 0){
+    footer.innerHTML =`
+      <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>
+    `
+  }
+
+  else{
+    const nCantidad = Object.values(carrito).reduce((count, {cantidad}) => count + cantidad,0)
+    const nPrecio = Object.values(carrito).reduce((count, {precio, cantidad}) => count + precio * cantidad, 0)
+    
+    templateFooter.querySelectorAll('td')[0].textContent = nCantidad
+    templateFooter.querySelector('span').textContent = nPrecio
+    const clone = templateFooter.cloneNode(true)
+    fragment.appendChild(clone)
+    footer.appendChild(fragment)
+  }
+}
+
+//Funcion de borrar carrito si se detecta que el boton que contiene la class btn-danger fue clickeado
+
+const vaciarCarrito = e => {
+  if(e.target.classList.contains('btn-danger')){
+    items.innerHTML = '' 
+    Object.values(carrito) = {}
+  }
+  e.stopPropagation()
 }
