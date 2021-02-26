@@ -6,6 +6,8 @@ const fragment = document.createDocumentFragment()
 const template = document.getElementById('template-card').content
 const templateFooter = document.getElementById('template-footer').content
 const templateCarrito = document.getElementById('template-carrito').content
+const searchBar = document.getElementById('searchBar')
+const buttonSearch = searchBar.querySelector('button')
 let carrito = {}
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -45,6 +47,7 @@ const pintarCards = data => {
     template.querySelector('h5').textContent = item.title
     template.querySelector('p').textContent = item.precio
     template.querySelector('.btn-dark').dataset.id = item.id
+    listarProducto(item)
     const clone = template.cloneNode(true)
     fragment.appendChild(clone)
   });
@@ -60,7 +63,6 @@ const addToCart = e => {
   }
   e.stopPropagation()
 }
-
 
 const setCarrito = objeto => {
   
@@ -145,4 +147,23 @@ const btnAccion = (e) => {
   }
   pintarCarrito()
   e.stopPropagation()
+}
+
+buttonSearch.addEventListener('click', () => {
+  searchBar.querySelector('nav').style.display = 'block'
+  const close = searchBar.querySelector('.close')
+  close.addEventListener('click', () => {
+    searchBar.querySelector('nav').style.display = 'none'
+  })
+
+  const search = searchBar.querySelector('input')
+  search.addEventListener('change', e => {
+    console.log(e.target.value);
+    listarProducto(e)
+  })
+})
+
+const listarProducto = (item, e) => {
+  console.log(item)
+ 
 }
