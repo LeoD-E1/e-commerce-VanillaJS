@@ -12,3 +12,20 @@
   width: 100vw;
   object-fit: cover;
 }
+
+.title {
+  color: aliceblue;
+}
+
+.table {
+  position: absolute;
+  left: 20%;
+  text-align: center;
+  background-color: beige;
+  max-width: 1050px;
+}
+
+#cards {
+  margin: 20px;
+  padding-left: 20%;
+}
