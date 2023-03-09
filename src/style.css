@@ -1,31 +1,38 @@
-.container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  text-align: center;
-  background-color: transparent;
-  height: 100vh;
+body {
+  background-image: url("https://s1.1zoom.me/b5050/219/Fast_food_Pizza_Tomatoes_Wood_planks_562796_3840x2160.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-.img-back {
-  height: 100vh;
-  width: 100vw;
-  object-fit: cover;
+.container {
+  display: flex;
+  gap: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .title {
-  color: aliceblue;
+  color: crimson;
+  text-align: center;
 }
 
 .table {
-  position: absolute;
-  left: 20%;
   text-align: center;
   background-color: beige;
   max-width: 1050px;
+  column-span: 1;
 }
 
 #cards {
-  margin: 20px;
-  padding-left: 20%;
+  padding: 10px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }

@@ -17,13 +17,8 @@
   </head>
 
   <body style="overflow-x: hidden">
-    <img
-      class="img-back"
-      src="https://s1.1zoom.me/b5050/219/Fast_food_Pizza_Tomatoes_Wood_planks_562796_3840x2160.jpg"
-    />
+    <h1 class="title my-3">Carrito de Compras</h1>
     <div class="container">
-      <h1 class="title my-3">Carrito de Compras</h1>
-
       <div class="row" id="cards"></div>
 
       <table class="table">
@@ -70,14 +65,12 @@
     </template>
 
     <template id="template-card">
-      <div class="col-12 mb-2 col-md-3 col-sm-6 col-xs-12">
-        <div class="card">
-          <img src="" alt="" class="card-img-top" />
-          <div class="card-body">
-            <h5>${item.title}</h5>
-            <p>${item.precio}</p>
-            <button class="btn btn-dark">Comprar</button>
-          </div>
+      <div class="card">
+        <img src="" alt="" class="card-img-top" />
+        <div class="card-body">
+          <h5>${item.title}</h5>
+          <p>${item.precio}</p>
+          <button class="btn btn-dark">Comprar</button>
         </div>
       </div>
     </template>
